@@ -21,7 +21,7 @@ jobs:
         run: |
           sudo apt update && sudo apt upgrade
           sudo apt install ninja-build
-          sudo apt-get install libboost* qt5
+          sudo apt-get install libboost* qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
           git submodule update --init --recursive
           mkdir build
           cd build
