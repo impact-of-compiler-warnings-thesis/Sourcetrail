@@ -17,18 +17,20 @@ jobs:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install sonar-scanner and build-wrapper
         uses: SonarSource/sonarcloud-github-c-cpp@v1
+      - name: Init submodules
+        run: git submodule update --init --recursive
+      - name: Install dependencies
+        run: |
+          sudo apt update && sudo apt upgrade
+          sudo apt install clang-11 --install-suggests
+          sudo apt install ninja-build
+          sudo apt install libboost* qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5svg5-dev
       - name: Run build-wrapper
         env:
           CXX: /usr/bin/clang++
           CC: /usr/bin/clang
         run: |
-          sudo apt update && sudo apt upgrade
-          sudo apt install clang-11 --install-suggests
-          sudo apt install ninja-build
-          sudo apt-get install libboost* qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5svg5-dev
-          git submodule update --init --recursive
-          mkdir build
-          cd build
+          mkdir build && cd build
           cmake .. -GNinja
           cd ..
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ninja -C build
