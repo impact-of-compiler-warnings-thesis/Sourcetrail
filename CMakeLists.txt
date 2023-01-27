@@ -284,7 +284,7 @@ if (WIN32)
 endif()
 
 
-add_subdirectory(src/app)
+# add_subdirectory(src/app)
 add_subdirectory(src/external)
 add_subdirectory(src/indexer)
 add_subdirectory(src/lib)
