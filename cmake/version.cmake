@@ -44,6 +44,11 @@ else(EXISTS "${CMAKE_SOURCE_DIR}/.git")
 
 endif(EXISTS "${CMAKE_SOURCE_DIR}/.git")
 
+# Little hack to make analysis possible
+set(VERSION_YEAR 2023)
+set(VERSION_MINOR 0)
+set(VERSION_COMMIT 0)
+
 set(VERSION_STRING "${VERSION_YEAR}.${VERSION_MINOR}.${VERSION_COMMIT}")
 
 message(STATUS "Version: ${VERSION_STRING}")
